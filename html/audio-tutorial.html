@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Fake Audios</title>
+    <link rel="stylesheet" href="../css/style-tut.css">
+    <script src="https://kit.fontawesome.com/9e6b39957a.js" crossorigin="anonymous"></script>
+    <script>
+        let speech;
+        let isPlaying = false;
+
+        function initializeSpeech() {
+            const textToRead = `
+                Deep fake audios are manipulated audio recordings created using artificial intelligence (AI) techniques. These audios can mimic someone's voice and create realistic-sounding speech, often with malicious intent.
+
+                Examples of how deep fake audios can be used include:
+                1. Impersonating Someone’s Voice: AI is used to replicate a person's voice, potentially leading to fraud, defamation, or reputational damage.
+                2. Misinformation and Manipulation: Deep fake audios can spread false information, making it difficult for people to distinguish between real and fake recordings.
+                3. Financial Fraud: Attackers can use deep fake audios to impersonate company executives and issue fraudulent instructions to transfer money.
+                4. Privacy Violations: Personal data can be extracted through deep fake audios by impersonating a person to gain access to confidential information.
+            `;
+
+            speech = new SpeechSynthesisUtterance(textToRead);
+            speech.lang = "en-US";
+            speech.rate = 1; // Adjust speaking speed
+            speech.pitch = 1; // Adjust pitch
+        }
+
+        function playSpeech() {
+            if (!speech) initializeSpeech();
+            if (!isPlaying) {
+                window.speechSynthesis.speak(speech);
+                isPlaying = true;
+            } else if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying) {
+                window.speechSynthesis.pause();
+            }
+        }
+
+        function restartSpeech() {
+            window.speechSynthesis.cancel();
+            initializeSpeech();
+            playSpeech();
+        }
+
+        // Ensure speech stops when the page is unloaded
+        window.addEventListener("beforeunload", () => {
+            window.speechSynthesis.cancel();
+        });
+    </script>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="container">
+            <header>
+                <h1>Deep Fake Audios</h1>
+            </header>
+
+            <section class="content">
+                <p>
+                    Deep fake audios are manipulated audio recordings created using artificial intelligence (AI) techniques. These audios can mimic someone's voice and create realistic-sounding speech, often with malicious intent.
+                </p>
+                <section class="examples">
+                    <h2><u>Examples of how deep fake audios can be used include:</u></h2>
+                    <ul>
+                        <li><strong>Impersonating Someone’s Voice:</strong> AI is used to replicate a person's voice, potentially leading to fraud, defamation, or reputational damage.</li>
+                        <li><strong>Misinformation and Manipulation:</strong> Deep fake audios can spread false information, making it difficult for people to distinguish between real and fake recordings.</li>
+                        <li><strong>Financial Fraud:</strong> Attackers can use deep fake audios to impersonate company executives and issue fraudulent instructions to transfer money.</li>
+                        <li><strong>Privacy Violations:</strong> Personal data can be extracted through deep fake audios by impersonating a person to gain access to confidential information.</li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Speech Controls -->
+            <div class="speech-controls">
+                <button onclick="playSpeech()" class="control-button">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button onclick="pauseSpeech()" class="control-button">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button onclick="restartSpeech()" class="control-button">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+            </div>
+
+            <section class="cta">
+                <h2>Click below to test your knowledge on Deep Fake Audios!</h2>
+                <nav class="buttons">
+                    <a href="audio-detection2.html" class="button">Test Your Knowledge</a>
+                </nav>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        .speech-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .control-button i {
+            margin-right: 5px;
+        }
+
+        .control-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>

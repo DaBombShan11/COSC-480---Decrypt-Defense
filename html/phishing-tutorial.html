@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Emails</title>
+    <link rel="stylesheet" href="../css/style-tut.css">
+    <script src="https://kit.fontawesome.com/9e6b39957a.js" crossorigin="anonymous"></script>
+    <script>
+        let speech;
+        let isPlaying = false;
+
+        function initializeSpeech() {
+            const textToRead = `
+                Phishing emails are fraudulent messages designed to trick recipients into revealing sensitive information like passwords or financial details. Attackers impersonate legitimate businesses or organizations to create a sense of urgency.
+
+                Examples of indicators for phishing emails include:
+                1. Unfamiliar Sender Addresses: Email addresses that don’t match the company or individual they claim to represent.
+                2. Suspicious Links or Attachments: Hidden or shortened links that lead to malicious websites.
+                3. Urgent or Threatening Language: Messages that pressure the recipient to take immediate action.
+                4. Grammatical Errors: Phishing emails often contain spelling or grammar mistakes.
+            `;
+
+            speech = new SpeechSynthesisUtterance(textToRead);
+            speech.lang = "en-US";
+            speech.rate = 1; // Adjust speaking speed
+            speech.pitch = 1; // Adjust pitch
+        }
+
+        function playSpeech() {
+            if (!speech) initializeSpeech();
+            if (!isPlaying) {
+                window.speechSynthesis.speak(speech);
+                isPlaying = true;
+            } else if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying) {
+                window.speechSynthesis.pause();
+            }
+        }
+
+        function restartSpeech() {
+            window.speechSynthesis.cancel();
+            initializeSpeech();
+            playSpeech();
+        }
+
+        // Ensure speech stops when the page is unloaded
+        window.addEventListener("beforeunload", () => {
+            window.speechSynthesis.cancel();
+        });
+    </script>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="container">
+            <header>
+                <h1>Phishing Emails</h1>
+            </header>
+
+            <section class="content">
+                <p>
+                    Phishing emails are fraudulent messages designed to trick recipients into revealing sensitive information like passwords or financial details. Attackers impersonate legitimate businesses or organizations to create a sense of urgency.
+                </p>
+                <section class="indicators">
+                    <h2><u>Examples of indicators for phishing emails include:</u></h2>
+                    <ul>
+                        <li><strong>Unfamiliar Sender Addresses:</strong> Email addresses that don’t match the company or individual they claim to represent.</li>
+                        <li><strong>Suspicious Links or Attachments:</strong> Hidden or shortened links that lead to malicious websites.</li>
+                        <li><strong>Urgent or Threatening Language:</strong> Messages that pressure the recipient to take immediate action.</li>
+                        <li><strong>Grammatical Errors:</strong> Phishing emails often contain spelling or grammar mistakes.</li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Speech Controls -->
+            <div class="speech-controls">
+                <button onclick="playSpeech()" class="control-button">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button onclick="pauseSpeech()" class="control-button">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button onclick="restartSpeech()" class="control-button">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+            </div>
+
+            <section class="cta">
+                <h2>Click below to test your knowledge on Phishing Emails!</h2>
+                <nav class="buttons">
+                    <a href="phishing-detection2.html" class="button">Test Your Knowledge</a>
+                </nav>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        .speech-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .control-button i {
+            margin-right: 5px;
+        }
+
+        .control-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,123 @@
+/* Existing styles */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Kumbh Sans", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    background-color: #121212;
+    color: #ecf0f1;
+}
+.grid-container {
+    display: grid; 
+    place-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+#video {
+    border: 2px solid #2575fc;
+    width: 320px; /* Adjust size as needed */
+    height: 240px; /* Adjust size as needed */
+}
+
+#video-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Center items horizontally */
+}
+
+/* Style for the capture button */
+#capture-button {
+    background: linear-gradient(135deg, #6a11cb 0%, 
+    #2575fc 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px; /* Space between video and button */
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Styles for face options */
+#face-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#swap-button
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.face-option {
+    width: 150px; /* Adjust size */
+    height: 150px; /* Adjust size */
+    object-fit: cover; /* Ensures images are cropped to fit */
+    margin: 0 10px; /* Space between images */
+    border: 2px solid transparent; /* Initial border */
+    cursor: pointer;
+}
+
+.face-option.selected {
+    border: 2px solid #2575fc; /* Highlight selected face */
+}
+
+/* Align the captured and swapped images with the arrow */
+#image-container {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center the images */
+    justify-content: center; /* Center the content horizontally */
+    margin-top: 20px; /* Space above the container */
+}
+
+/* Style for captured and swapped image display */
+#captured-image, #swapped-image {
+    width: 150px; /* Set the width */
+    height: 150px; /* Set the height */
+    margin: 0 10px; /* Space on the sides */
+}
+
+/* Style for the arrow */
+.arrow {
+    font-size: 30px; /* Size of the arrow */
+    color: rgb(255, 145, 0); /* Color of the arrow */
+}
+
+nav.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background: linear-gradient(135deg, #6a11cb 0%, 
+    #2575fc 100%);
+    color: white;
+}
+
+.button:hover{
+    background: #2575fc;
+    transition: all 0.3s ease;
+}

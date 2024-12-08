@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Fake Audio Guessing Game</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: "Kumbh Sans", sans-serif;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff; /* Set a default text color for readability */
+            padding: 20px;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.65); /* Slight transparency for soft look */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px; /* Limiting max width */
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect for container to give subtle interaction */
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header Styling */
+        h1 {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* Choice Button Styling */
+        button {
+            padding: 12px 25px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #2575fc;
+            transform: scale(1.05);
+        }
+
+        /* Image Styling */
+        .audio-image {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Explanation Styling */
+        .explanation {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #f39c12;
+        }
+
+        /* Next Button Styling */
+        .next-button {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Section Styling */
+        .section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="section-1" class="section active">
+        <h1>Audio Detection: Real or Deepfake?</h1>
+        
+        <!-- Image above the play button for audio 1 -->
+        <img src="../images/obama-audio.jpeg" alt="Audio 1 Image" class="audio-image">
+        
+        <div class="audio-container">
+            <h2>Audio 1:</h2>
+            <audio id="audio-1" controls>
+                <source src="../audio/BarackObamaDeepfake.wav" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div>
+            <button onclick="makeGuess(1, 'real')">Real</button>
+            <button onclick="makeGuess(1, 'fake')">Fake</button>
+        </div>
+
+        <div id="explanation-1" class="explanation"></div>
+        <button id="next-1" class="next-button" onclick="nextSection(1)">Next</button>
+    </div>
+
+    <div id="section-2" class="section">
+        <h1>Guess if the audio is Real or Fake!</h1>
+        
+        <!-- Image above the play button for audio 2 -->
+        <img src="../images/trump-audio.jpeg" alt="Audio 2 Image" class="audio-image">
+        
+        <div class="audio-container">
+            <h2>Audio 2:</h2>
+            <audio id="audio-2" controls>
+                <source src="../audio/DonaldTrumpDeepfake.wav" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div>
+            <button onclick="makeGuess(2, 'real')">Real</button>
+            <button onclick="makeGuess(2, 'fake')">Fake</button>
+        </div>
+
+        <div id="explanation-2" class="explanation"></div>
+        <button id="next-2" class="next-button" onclick="nextSection(2)">Next</button>
+    </div>
+
+    <div id="final-section" class="section">
+        <h1>Congratulations on Completing the Game!</h1>
+        <p>You've completed the guessing game! Great job!</p>
+    </div>
+
+    <script src="../js/script-audio2.js"></script>
+</body>
+</html>

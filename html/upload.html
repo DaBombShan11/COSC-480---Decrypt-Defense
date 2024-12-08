@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Kumbh Sans", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            background-color: #121212;
+            color: #ecf0f1;
+        }
+
+        .grid-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Adjust for navbar height */
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+            background: none;
+            color: #ecf0f1;
+            border: 1px solid #2575fc;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #2575fc;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #1e1e1e;
+            border: 1px solid #2575fc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #2575fc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            background-color: black;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar__container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        #navbar__logo {
+            background-color: darkblue;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-size: 100%;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.25rem;
+        }
+
+        .navbar__menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar__item {
+            height: 80px;
+        }
+
+        .navbar__links {
+            color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+
+        .navbar__links:hover {
+            color: #6a11cb;
+            transition: all 0.3s ease;
+        }
+
+        .navbar__btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">Decrypt Defense</a>
+            <ul class="navbar__menu">
+                <li class="navbar__item"><a href="index.html" class="navbar__links">Home</a></li>
+                <li class="navbar__item"><a href="tutorial.html" class="navbar__links">Tutorial</a></li>
+                <li class="navbar__item"><a href="animation3.html" class="navbar__links">Animator</a></li>
+                <li class="navbar__item"><a href="image-tutorial.html" class="navbar__links">Image Detection</a></li>
+                <li class="navbar__item"><a href="video-tutorial.html" class="navbar__links">Video Detection</a></li>
+                <li class="navbar__item"><a href="audio-tutorial.html" class="navbar__links">Audio Detection</a></li>
+                <li class="navbar__item"><a href="phishing-tutorial.html" class="navbar__links">Phishing Detection</a></li>
+                <li class="navbar__btn"><a href="upload.html" class="button">Algorithm Upload</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="grid-container">
+        <div class="container">
+            <h1>Image Checker</h1>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="code">Upload Code File:</label>
+                    <input type="file" id="code" name="code" accept=".py" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Upload Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                <button type="submit">Check Image</button>
+            </form>
+            <div class="result" id="result" style="display: none;">
+                <p><strong>Result:</strong> The image is fake. Your detection algorithm works.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Simulate the process and show result
+            const resultContainer = document.getElementById("result");
+            resultContainer.style.display = "block";
+        });
+    </script>
+</body>
+</html>

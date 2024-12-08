@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Detection</title>
+    <link rel="stylesheet" href="../css/style-tut.css">
+    <script src="https://kit.fontawesome.com/9e6b39957a.js" crossorigin="anonymous"></script>
+    <script>
+        let speech;
+        let isPlaying = false;
+
+        function initializeSpeech() {
+            const textToRead = `
+                Image detection involves analyzing visual content to identify alterations or manipulations, such as deepfakes or digitally altered images.
+                This process leverages advanced algorithms and machine learning techniques to spot inconsistencies in pixel data, patterns, and features that may indicate tampering.
+
+                Some approaches for detection may include:
+                Pixel Analysis: Examining individual pixels for signs of manipulation or irregularities.
+                Metadata Inspection: Analyzing file metadata for inconsistencies that may suggest editing.
+                Pattern Recognition: Utilizing machine learning models to identify typical patterns of authentic images.
+                Color Consistency: Checking for unnatural color gradients or shadows that differ from the original context.
+                Artifact Detection: Identifying artifacts that occur as a result of digital editing or compression.
+            `;
+
+            speech = new SpeechSynthesisUtterance(textToRead);
+            speech.lang = "en-US";
+            speech.rate = 1; // Adjust speaking speed
+            speech.pitch = 1; // Adjust pitch
+            console.log("Speech initialized.");
+        }
+
+        function playSpeech() {
+            if (!speech) initializeSpeech();
+            if (!isPlaying) {
+                try {
+                    window.speechSynthesis.speak(speech);
+                    isPlaying = true;
+                    console.log("Speech is playing.");
+                } catch (err) {
+                    console.error("Error playing speech:", err);
+                }
+            } else if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+                console.log("Speech resumed.");
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying) {
+                window.speechSynthesis.pause();
+                console.log("Speech paused.");
+            }
+        }
+
+        function restartSpeech() {
+            window.speechSynthesis.cancel();
+            initializeSpeech();
+            playSpeech();
+            console.log("Speech restarted.");
+        }
+
+        // Ensure speech stops when the page is unloaded
+        window.addEventListener("beforeunload", () => {
+            window.speechSynthesis.cancel();
+            console.log("Speech cancelled on unload.");
+        });
+    </script>
+</head>
+<body>
+<div class="grid-container">
+    <div class="container">
+        <header>
+            <h1>Image Detection</h1>
+        </header>
+
+        <section class="content">
+            <p>
+                Image detection involves analyzing visual content to identify alterations or manipulations, such as deepfakes or digitally altered images.
+                This process leverages advanced algorithms and machine learning techniques to spot inconsistencies in pixel data, patterns, and features that may indicate tampering.
+            </p>
+            <section class="approaches">
+                <h2><u>Some approaches for detection may include:</u></h2>
+                <ul>
+                    <li><strong>Pixel Analysis:</strong> Examining individual pixels for signs of manipulation or irregularities.</li>
+                    <li><strong>Metadata Inspection:</strong> Analyzing file metadata for inconsistencies that may suggest editing.</li>
+                    <li><strong>Pattern Recognition:</strong> Utilizing machine learning models to identify typical patterns of authentic images.</li>
+                    <li><strong>Color Consistency:</strong> Checking for unnatural color gradients or shadows that differ from the original context.</li>
+                    <li><strong>Artifact Detection:</strong> Identifying artifacts that occur as a result of digital editing or compression.</li>
+                </ul>
+            </section>
+        </section>
+
+        <!-- Speech Controls -->
+        <div class="speech-controls">
+            <button onclick="playSpeech()" class="control-button">
+                <i class="fas fa-play"></i> Play
+            </button>
+            <button onclick="pauseSpeech()" class="control-button">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+            <button onclick="restartSpeech()" class="control-button">
+                <i class="fas fa-redo"></i> Restart
+            </button>
+        </div>
+
+        <section class="cta">
+            <h2>Click below to learn more about Image Detection!</h2>
+            <nav class="buttons">
+                <a href="image-detection2.html" class="button">Test Your Knowledge</a>
+            </nav>
+        </section>
+    </div>
+</div>
+
+<style>
+    .speech-controls {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .control-button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .control-button i {
+        margin-right: 5px;
+    }
+
+    .control-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</body>
+</html>

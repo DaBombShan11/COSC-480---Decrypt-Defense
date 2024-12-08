@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Swap Training Module</title>
+    <link rel="stylesheet" href="../css/animation.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--background-gradient, linear-gradient(to bottom, #4c4c8c, #1e1e40));
+            color: var(--primary-text-color, #fff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: var(--box-background-color, rgba(255, 255, 255, 0.1));
+            border: 1px solid var(--box-border-color, #ccc);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: var(--box-inner-color, rgba(0, 0, 0, 0.5));
+        }
+
+        .box.hidden {
+            display: none;
+        }
+
+        #progress-bar-container {
+            margin-top: 20px;
+        }
+
+        #progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #progress-bar-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+        }
+
+        #face-selection img {
+            max-width: 70px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #face-selection img.selected {
+            border: 2px solid #4caf50;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Face Swap Training Module</h1>
+
+        <!-- Box 1: Upload Image -->
+        <div id="upload-box" class="box">
+            <h2>Step 1: Upload or Capture Your Image</h2>
+            <video id="video" autoplay></video>
+            <button id="capture-button"> Capture Image</button>
+            <input type="file" id="upload-input" accept="image/*">
+            <canvas id="canvas" style="display: none;"></canvas>
+        </div>
+
+        <div>
+            <h2><u>Captured Image</u></h2>
+            <div id="image-container"> <!-- Container for alignment -->
+                <img id="captured-image" alt="Captured Image" style="display: none;">
+                <img id="swapped-image" alt="Swapped Image" style="display: none;">
+                <button id="confirm-upload-button" disabled>Confirm</button>
+            </div>
+        </div>
+        <!-- Box 2: Celebrity Selection -->
+        <div id="celebrity-box" class="box hidden">
+            <h2>Step 2: Choose a Celebrity Face</h2>
+            <div id="face-selection">
+                <img src="../images/beyonce-swap.webp" alt="Face 1" class="face-option">
+                <img src="../images/leonardo-swap.webp" alt="Face 2" class="face-option">
+                <img src="../images/denzel-swap.jpg" alt="Face 3" class="face-option">
+                <img src="../images/rihanna-swap.jpeg" alt="Face 4" class="face-option">
+                <img src="../images/zendaya-swap.jpeg" alt="Face 5" class="face-option">
+            </div>
+            <button id="confirm-celebrity-button" disabled>Swap</button>
+        </div>
+
+        <!-- Box 3: Swapped Image Display -->
+        <div id="result-box" class="box hidden">
+            <h2>Step 3: Swapped Image</h2>
+            <img id="swapped-image" alt="Swapped Image" style="max-width: 100%; display: none;">
+            <p>Here's your swapped image! Click to learn more about deep fakes!</p>
+
+            <nav class="buttons">
+                <a href="image-tutorial.html" class="button"> Learn About Detecting Deep Fake Images</a>
+            </nav>
+        </div>
+
+        <!-- Progress Bar -->
+        <div id="progress-bar-container">
+            <div id="progress-bar">
+                <div id="progress-bar-fill"></div>
+            </div>
+            <p id="progress-text">Progress: 0/7</p>
+        </div>
+    </div>
+
+    <script src="../js/animation3.js"></script>
+</body>
+</html>
+
+
+

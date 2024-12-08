@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Kumbh Sans", sans-serif;
+        }
+
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 150vh;
+            margin: 0; 
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 100px;
+            color: #ffcc00;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .congratulations-image {
+            width: 250px;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #2575fc;
+        }
+
+        .image-button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: black;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        .navbar a:hover {
+            background-color: #ffcc00;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+    </div>
+
+    <!-- Congratulations Content -->
+    <h1>Congratulations!</h1>
+    <p>You have completed Decrypt Defense!</p>
+    <p>You are now certified in identifying deep fake images, videos, emails, and audio.</p>
+    <p>Well done!</p>
+
+    <!-- Image and Button Container -->
+    <div class="image-button-container">
+        <img src="../images/of COMPLETION.png" alt="Trophy" class="congratulations-image" />
+        <button class="button" onclick="location.href='upload.html';">
+            Test Your Deep Fake Knowledge By Creating A Detection Algorithm
+        </button>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" class="confetti"></canvas>
+
+    <!-- Autoplay audio -->
+    <audio id="congratulations-sound" src="../audio/congratulations.wav" preload="auto" autoplay muted></audio>
+
+    <script>
+        // Confetti function
+        function createConfetti() {
+            const canvas = document.getElementById("confetti-canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700"];
+            let confettiPieces = [];
+
+            // Create confetti pieces
+            for (let i = 0; i < 100; i++) {
+                confettiPieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 10 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 5 + 1,
+                    angle: Math.random() * 360
+                });
+            }
+
+            // Animation loop
+            function animateConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let piece of confettiPieces) {
+                    ctx.beginPath();
+                    ctx.arc(piece.x, piece.y, piece.size, 0, 2 * Math.PI);
+                    ctx.fillStyle = piece.color;
+                    ctx.fill();
+
+                    piece.y += piece.speed;
+                    piece.x += Math.sin(piece.angle) * 2;
+                    piece.angle += Math.random() * 0.05;
+
+                    if (piece.y > canvas.height) piece.y = -10;
+                    if (piece.x > canvas.width) piece.x = 0;
+                    if (piece.x < 0) piece.x = canvas.width;
+                }
+                requestAnimationFrame(animateConfetti);
+            }
+
+            animateConfetti();
+        }
+
+        // Play sound when ready
+        window.onload = function() {
+            createConfetti();
+
+            // Unmute the audio after a short delay to bypass browser restrictions
+            const sound = document.getElementById("congratulations-sound");
+            sound.play();
+            sound.muted = false; // Unmute the sound after it starts playing
+        }
+    </script>
+</body>
+</html>
